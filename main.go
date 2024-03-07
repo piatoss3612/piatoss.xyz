@@ -19,6 +19,7 @@ func main() {
 	router.Use(gin.Logger())
 
 	router.StaticFile("/favicon.ico", "./favicon.ico")
+	router.Static("/dist", "./dist")
 	router.Static("/assets", "./assets")
 	router.LoadHTMLGlob("templates/**/*")
 	router.GET("/", func(c *gin.Context) {
@@ -28,7 +29,7 @@ func main() {
 	})
 	router.GET("/greeting", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "greeting", gin.H{
-			"Greeting": "Hello, World!",
+			"Greeting": "Hello, World!!",
 		})
 	})
 
