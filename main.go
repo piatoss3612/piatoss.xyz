@@ -23,14 +23,22 @@ func main() {
 	router.Static("/assets", "./assets")
 	router.LoadHTMLGlob("templates/**/*")
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "Main website",
-		})
+		c.HTML(http.StatusOK, "index.html", nil)
 	})
-	router.GET("/greeting", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "greeting", gin.H{
-			"Greeting": "Hello, World!!",
-		})
+	router.GET("/home", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "home.html", nil)
+	})
+	router.GET("/about", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "about.html", nil)
+	})
+	router.GET("/project", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "project.html", nil)
+	})
+	router.GET("/study", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "study.html", nil)
+	})
+	router.GET("/guest", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "guest.html", nil)
 	})
 
 	srv := &http.Server{
