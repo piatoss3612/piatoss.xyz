@@ -7,11 +7,10 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "piatoss-tfstate-bucket"
-    key            = "terraform.tfstate"
-    region         = "ap-northeast-2"
-    dynamodb_table = "piatoss-tfstate-lock-table"
-    encrypt        = true
+    bucket  = "piatoss-tfstate-bucket"
+    key     = "terraform.tfstate"
+    region  = "ap-northeast-2"
+    encrypt = true
   }
 }
 
