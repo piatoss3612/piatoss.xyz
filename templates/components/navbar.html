@@ -1,12 +1,21 @@
 <header>
   <div
     class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"
+    hx-target=".page"
+    hx-on:htmx-after-on-load="
+      let currentTab = document.querySelector('[aria-selected=true]');
+      if (currentTab) {
+        currentTab.setAttribute('aria-selected', 'false');
+        currentTab.classList.remove('active');
+      }
+      let newTab = event.target;
+      newTab.setAttribute('aria-selected', 'true');
+      newTab.classList.add('active');
+    "
   >
     <a
       class="d-flex align-items-center text-dark text-decoration-none"
       hx-get="/home"
-      hx-target=".page"
-      hx-swap="innerHTML"
     >
       <img
         src="/assets/logo.png"
@@ -18,35 +27,49 @@
       <span class="fs-4">piatoss on the block</span>
     </a>
 
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-      <a
-        class="me-4 py-2 text-dark text-decoration-none"
-        hx-get="/about"
-        hx-target=".page"
-        hx-swap="innerHTML"
-        >About</a
-      >
-      <a
-        class="me-4 py-2 text-dark text-decoration-none"
-        hx-get="/project"
-        hx-target=".page"
-        hx-swap="innerHTML"
-        >Project</a
-      >
-      <a
-        class="me-4 py-2 text-dark text-decoration-none"
-        hx-get="/study"
-        hx-target=".page"
-        hx-swap="innerHTML"
-        >Study</a
-      >
-      <a
-        class="py-2 text-dark text-decoration-none"
-        hx-get="/guest"
-        hx-target=".page"
-        hx-swap="innerHTML"
-        >Guest</a
-      >
+    <nav
+      id="navbar"
+      role="navigation"
+      class="d-inline-flex mt-2 mt-md-0 ms-md-auto"
+    >
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <span
+            class="nav-link"
+            aria-controls="page"
+            aria-selected="false"
+            hx-get="/about"
+            >About</span
+          >
+        </li>
+        <li class="nav-item">
+          <span
+            class="nav-link"
+            aria-controls="page"
+            aria-selected="false"
+            hx-get="/project"
+            >Project</span
+          >
+        </li>
+        <li class="nav-item">
+          <span
+            class="nav-link"
+            aria-controls="page"
+            aria-selected="false"
+            hx-get="/study"
+            >Study</span
+          >
+        </li>
+        <li class="nav-item">
+          <span
+            class="nav-link disabled"
+            aria-controls="page"
+            aria-selected="false"
+            hx-get="/guest"
+            >Guest</span
+          >
+        </li>
+      </ul>
     </nav>
   </div>
 </header>

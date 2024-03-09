@@ -4,7 +4,9 @@
   <body>
     <div class="container py-3">
       {{ template "navbar.html" . }}
-      <div class="page">{{ template "home.html" . }}</div>
+      <div id="page" class="page" hx-trigger="load">
+        {{ template "home.html" . }}
+      </div>
       <!-- {{ template "footer.html" .}}  -->
       {{ template "scripts.html" .}}
     </div>
