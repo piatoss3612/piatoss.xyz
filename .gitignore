@@ -1,3 +1,7 @@
 tmp
 node_modules
 .env
+
+# terraform
+.terraform*
+terraform.tfstate*
