@@ -74,3 +74,7 @@ resource "aws_cloudfront_distribution" "piatoss_distribution" {
     ManagedBy   = "Terraform"
   }
 }
+
+output "cloudfront_distribution_id" {
+  value = aws_cloudfront_distribution.piatoss_distribution.id
+}

@@ -1,4 +1,14 @@
 .PHONY: dev
 dev:
 	@echo "Starting development server..."
-	@npm run dev
+	@cd piatoss && npm run dev
+
+.PHONY: build
+build:
+	@echo "Building..."
+	@cd piatoss && npm run build
+
+.PHONY: sync
+sync:
+	@echo "Syncing with s3..."
+	@cd piatoss && aws s3 sync out/ s3://piatoss.xyz && aws cloudfront create-invalidation --distribution-id $(did) --paths "/*"
