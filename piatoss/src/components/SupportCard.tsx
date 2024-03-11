@@ -9,7 +9,6 @@ export default function SupportCard({ flipCard }: { flipCard: () => void }) {
       w={["80%", "100%", "90%"]}
       alignItems="center"
       justifyContent="center"
-      style={{ backfaceVisibility: "hidden", rotate: "180" }}
     >
       <Box
         bg="white"

@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={roboto.className}>
         <ChakraProvider>
           <WalletProvider>
-            <Center minH="100vh" bgGradient="linear(to-br, pink.100, blue.100)">
+            <Center minH="100vh" bgGradient="linear(to-br, blue.800, teal.600)">
               {children}
             </Center>
           </WalletProvider>
