@@ -19,7 +19,7 @@ import {
   FaHeart,
 } from "react-icons/fa6";
 
-export default function ProfileCard() {
+export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
   return (
     <Flex
       p={5}
@@ -134,6 +134,7 @@ export default function ProfileCard() {
             boxShadow="md"
             _hover={{ bgGradient: "linear(to-r, pink.300, red.300)" }}
             leftIcon={<FaHeart />}
+            onClick={flipCard}
           >
             Support
           </Button>

@@ -3,6 +3,9 @@ import { Center } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
+import "@rainbow-me/rainbowkit/styles.css";
+import { WalletProvider } from "@/providers/WalletProvider";
+
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,9 +30,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <ChakraProvider>
-          <Center minH="100vh" bgGradient="linear(to-br, pink.100, blue.100)">
-            {children}
-          </Center>
+          <WalletProvider>
+            <Center minH="100vh" bgGradient="linear(to-br, pink.100, blue.100)">
+              {children}
+            </Center>
+          </WalletProvider>
         </ChakraProvider>
       </body>
     </html>

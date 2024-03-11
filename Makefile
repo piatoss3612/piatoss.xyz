@@ -1,12 +1,12 @@
 .PHONY: dev
 dev:
 	@echo "Starting development server..."
-	@cd piatoss && npm run dev
+	@cd piatoss && yarn dev
 
 .PHONY: build
 build:
 	@echo "Building..."
-	@cd piatoss && npm run build
+	@cd piatoss && yarn build
 
 .PHONY: sync
 sync:
