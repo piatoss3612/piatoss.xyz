@@ -1,11 +1,12 @@
 import { ChakraProvider } from "@/providers/ChakraProvider";
+import { Center } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "piatoss on the block",
+  title: "piatoss",
   description: "personal website of piatoss",
   applicationName: "piatoss",
   authors: [
@@ -25,7 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <ChakraProvider>{children}</ChakraProvider>
+        <ChakraProvider>
+          <Center minH="100vh" bgGradient="linear(to-br, pink.100, blue.100)">
+            {children}
+          </Center>
+        </ChakraProvider>
       </body>
     </html>
   );
