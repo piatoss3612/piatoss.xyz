@@ -9,6 +9,7 @@ const config = getDefaultConfig({
   appName: "Piatoss",
   projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "",
   chains: [polygonMumbai],
+  ssr: true,
 });
 
 export const WalletProvider = ({ children }: { children: React.ReactNode }) => {

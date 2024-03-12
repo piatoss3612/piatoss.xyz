@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@/providers/ChakraProvider";
-import { Center } from "@chakra-ui/react";
+import { Center, Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 
@@ -31,9 +31,15 @@ export default function RootLayout({
       <body className={roboto.className}>
         <ChakraProvider>
           <WalletProvider>
-            <Center minH="100vh" bgGradient="linear(to-br, blue.800, teal.600)">
-              {children}
-            </Center>
+            <Box
+              className={roboto.className}
+              minH="100vh"
+              bgGradient="linear(to-br, blue.800, teal.600)"
+            >
+              <Center w="100%" h="100vh">
+                {children}
+              </Center>
+            </Box>
           </WalletProvider>
         </ChakraProvider>
       </body>

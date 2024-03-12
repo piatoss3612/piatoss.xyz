@@ -23,9 +23,10 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
   return (
     <Flex
       p={5}
-      w={["80%", "100%", "90%"]}
+      w={["100%", "90%", "80%"]}
       alignItems="center"
       justifyContent="center"
+      h="100%"
     >
       <Box
         bg="white"
@@ -51,15 +52,14 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
           Hyohwak Lee
         </Text>
         <Text fontWeight="bold" color="gray.500" mb={4}>
-          Blockchain Developer
+          Blockchain Engineer
         </Text>
         <Text fontWeight="bold" fontSize="xl" mb={4}>
           My Journey
         </Text>
         <Text textAlign="center" color="gray.700" px={3}>
-          "Exploring the integration of blockchain in everyday life,
-          <br />I dream of crafting a better world through the power of
-          blockchain."
+          "Exploring the integration of blockchain in everyday life, I dream of
+          crafting a better world through the power of blockchain."
         </Text>
 
         <Stack
@@ -67,7 +67,7 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
           direction="row"
           spacing={4}
           align="center"
-          justify="center"
+          justifyContent="center"
         >
           <Link href="https://github.com/piatoss3612" isExternal>
             <IconButton
