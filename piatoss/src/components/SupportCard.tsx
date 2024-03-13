@@ -1,8 +1,12 @@
 import React from "react";
 import { Box, Flex, Text, Stack, Button } from "@chakra-ui/react";
 import WalletConnectButton from "./WalletConnectButton";
+import { useAccount } from "wagmi";
+import SupportBox from "./SupportBox";
 
 export default function SupportCard({ flipCard }: { flipCard: () => void }) {
+  const account = useAccount();
+
   return (
     <Flex
       p={5}
@@ -23,6 +27,7 @@ export default function SupportCard({ flipCard }: { flipCard: () => void }) {
 
         <Stack mt={6} direction="column" spacing={4}>
           <WalletConnectButton />
+          {account?.isConnected && <SupportBox />}
           <Button
             w="full"
             bgGradient="linear(to-r, pink.300, orange.400)"

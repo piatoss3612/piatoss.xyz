@@ -22,6 +22,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
+    "sweetalert2": "^11.10.6",
     "viem": "2.7.12",
     "wagmi": "^2.5.7"
   },
