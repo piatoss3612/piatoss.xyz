@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Text, Stack, Button } from "@chakra-ui/react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import WalletConnectButton from "./WalletConnectButton";
 
 export default function SupportCard({ flipCard }: { flipCard: () => void }) {
   return (
@@ -21,23 +21,15 @@ export default function SupportCard({ flipCard }: { flipCard: () => void }) {
       >
         <Text fontSize="xl">Thank you for your support!</Text>
 
-        <Stack
-          mt={8}
-          direction="column"
-          spacing={4}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <ConnectButton />
-        </Stack>
-        <Stack mt={8} direction="column" spacing={4}>
+        <Stack mt={6} direction="column" spacing={4}>
+          <WalletConnectButton />
           <Button
             w="full"
-            bgGradient="linear(to-r, teal.400, blue.400)"
+            bgGradient="linear(to-r, pink.300, orange.400)"
             color="white"
             rounded="xl"
             boxShadow="md"
-            _hover={{ bgGradient: "linear(to-r, teal.300, blue.300)" }}
+            _hover={{ bgGradient: "linear(to-r, pink.200, orange.300)" }}
             onClick={flipCard}
           >
             Back to Profile
