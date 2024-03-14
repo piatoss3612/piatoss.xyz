@@ -50,6 +50,7 @@ export default function SupportBox() {
     isSuccess: isConfirmed,
     isError: receiptIsError,
     error: receiptError,
+    isLoading: isReceiptLoading,
   } = useWaitForTransactionReceipt({ hash });
 
   const { data: amountInUSD } = useReadContract({
@@ -64,8 +65,9 @@ export default function SupportBox() {
 
     if (chainId === 80001) {
       // mumbai testnet
-      setContractAddress("0x7Bb88774d8F2c15779C8f8278C4ed8E5729d1678");
+      setContractAddress("0x99eb4FA25e0a3a4Eb8E7b53370D74ca76AF4b575");
     } else if (chainId === 11155111) {
+      // sepolia testnet
       setContractAddress("0x203A36744dD130f1De981EC72c2144862aECE6AA");
     } else {
       setContractAddress("");
@@ -157,17 +159,73 @@ export default function SupportBox() {
 
   useEffect(() => {
     if (isConfirmed) {
-      Swal.fire({
-        title: "Thank you!",
-        text: "Your support has been confirmed.",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-      console.log(receipt);
+      if (!receipt) {
+        Swal.fire({
+          title: "Thank you!",
+          text: "Your support has been confirmed.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      }
+
+      let transfer = false;
+      let levelUp = false;
+
+      for (let i = 0; i < receipt.logs.length; i++) {
+        const log = receipt.logs[i];
+
+        if (
+          log.topics[0] ===
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        ) {
+          transfer = true;
+        } else if (
+          log.topics[0] ===
+          "0xa49b8576e012f713baa7dceadb7d709aaec8773b498ecfe582d8b9c0c8fd074f"
+        ) {
+          levelUp = true;
+        }
+      }
+
+      if (transfer && levelUp) {
+        Swal.fire({
+          title: "Congratulations!",
+          text: "You've received a new NFT and leveled up!",
+          icon: "success",
+          imageUrl:
+            "https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
+          imageWidth: 200,
+          confirmButtonText: "OK",
+        });
+      } else if (transfer) {
+        Swal.fire({
+          title: "Thank you!",
+          text: "You've received a new NFT!",
+          icon: "success",
+          imageUrl:
+            "https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
+          imageWidth: 200,
+          confirmButtonText: "OK",
+        });
+      } else if (levelUp) {
+        Swal.fire({
+          title: "Congratulations!",
+          text: "You have leveled up!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } else {
+        Swal.fire({
+          title: "Thank you!",
+          text: "Your support has been confirmed.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      }
     } else if (receiptIsError) {
       Swal.fire({
         title: "Oops!",
-        text: "There was an error confirming your support.",
+        text: (receiptError as BaseError).message,
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -185,7 +243,7 @@ export default function SupportBox() {
             value={amount}
             onChange={handleAmountChange}
             isInvalid={amountIsInvalid}
-            isDisabled={isPending}
+            isDisabled={isPending || isReceiptLoading}
           />
           <Text fontSize="lg">
             {balanceData?.symbol ? balanceData.symbol : "ETHER"}
@@ -204,7 +262,7 @@ export default function SupportBox() {
       </Stack>
       <Button
         isDisabled={!contractAddress || amountIsInvalid}
-        isLoading={isPending}
+        isLoading={isPending || isReceiptLoading}
         w="full"
         bgGradient="linear(to-r, pink.400, red.400)"
         color="white"
