@@ -5,6 +5,7 @@ import { Roboto } from "next/font/google";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import { WalletProvider } from "@/providers/WalletProvider";
+import StarSky from "@/components/StarSky";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
@@ -31,11 +32,8 @@ export default function RootLayout({
       <body className={roboto.className}>
         <ChakraProvider>
           <WalletProvider>
-            <Box
-              className={roboto.className}
-              minH="100vh"
-              bgGradient="linear(to-br, blue.800, teal.600)"
-            >
+            <Box minH="100vh" position="relative" zIndex={10}>
+              <StarSky />
               <Center w="100%" h="100vh">
                 {children}
               </Center>
