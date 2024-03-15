@@ -66,9 +66,9 @@ export default function SupportBox() {
     if (chainId === 80001) {
       // mumbai testnet
       setContractAddress("0xA37A5a00e55b90B9522bB5181Fe4d64326a2bd36");
-    } else if (chainId === 11155111) {
-      // sepolia testnet
-      setContractAddress("0x203A36744dD130f1De981EC72c2144862aECE6AA");
+    } else if (chainId === 137) {
+      // polygon mainnet
+      setContractAddress("0x4FA0032BD433aC07418ca4d28031D48a4c384079");
     } else {
       setContractAddress("");
     }

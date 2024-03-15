@@ -256,6 +256,25 @@ export const FourDollarV1Abi = [
   },
   {
     type: "function",
+    name: "ownedToken",
+    inputs: [
+      {
+        name: "owner",
+        type: "address",
+        internalType: "address",
+      },
+    ],
+    outputs: [
+      {
+        name: "",
+        type: "uint256",
+        internalType: "uint256",
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "owner",
     inputs: [],
     outputs: [
