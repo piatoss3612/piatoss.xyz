@@ -191,7 +191,6 @@ export default function SupportBox() {
         Swal.fire({
           title: "Congratulations!",
           text: "You've received a new NFT and leveled up!",
-          icon: "success",
           imageUrl:
             "https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
           imageWidth: 200,
@@ -201,7 +200,6 @@ export default function SupportBox() {
         Swal.fire({
           title: "Thank you!",
           text: "You've received a new NFT!",
-          icon: "success",
           imageUrl:
             "https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
           imageWidth: 200,

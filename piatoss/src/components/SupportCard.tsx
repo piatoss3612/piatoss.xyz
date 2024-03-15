@@ -3,6 +3,7 @@ import { Box, Flex, Text, Stack, Button } from "@chakra-ui/react";
 import WalletConnectButton from "./WalletConnectButton";
 import { useAccount } from "wagmi";
 import SupportBox from "./SupportBox";
+import GuidePopover from "./GuidePopover";
 
 export default function SupportCard({ flipCard }: { flipCard: () => void }) {
   const account = useAccount();
@@ -23,8 +24,12 @@ export default function SupportCard({ flipCard }: { flipCard: () => void }) {
         p={6}
         textAlign="center"
       >
-        <Text fontSize="xl">Thank you for your support!</Text>
-
+        <Stack direction="row" justify={"space-between"}>
+          <Text fontSize="xl" mt={1}>
+            Thank you for supporting my dream!
+          </Text>
+          <GuidePopover />
+        </Stack>
         <Stack mt={6} direction="column" spacing={4}>
           <WalletConnectButton />
           {account?.isConnected && <SupportBox />}
