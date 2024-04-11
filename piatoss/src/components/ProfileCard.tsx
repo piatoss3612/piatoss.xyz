@@ -20,6 +20,15 @@ import {
 } from "react-icons/fa6";
 
 export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
+  const portfolioUrl =
+    "https://piatoss3612.notion.site/Lee-Hyohwak-bf38f6bb673a439f9325e92c0b09a6a6?pvs=4";
+
+  const openPortfolio = () => {
+    window.open(
+      "https://piatoss3612.notion.site/Lee-Hyohwak-bf38f6bb673a439f9325e92c0b09a6a6?pvs=4"
+    );
+  };
+
   return (
     <Flex
       p={5}
@@ -58,8 +67,8 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
           My Journey
         </Text>
         <Text textAlign="center" color="gray.700" px={3}>
-          "Exploring the integration of blockchain in everyday life, I dream of
-          crafting a better world through the power of blockchain."
+          Exploring the integration of blockchain in everyday life, I dream of
+          crafting a better world through the power of blockchain.
         </Text>
 
         <Stack
@@ -123,6 +132,7 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
             rounded="xl"
             boxShadow="md"
             _hover={{ bgGradient: "linear(to-r, teal.300, blue.300)" }}
+            onClick={openPortfolio}
           >
             Portfolio
           </Button>
