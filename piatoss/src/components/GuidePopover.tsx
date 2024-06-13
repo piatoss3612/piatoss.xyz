@@ -60,7 +60,7 @@ export default function GuidePopover() {
                   justifyContent={"center"}
                 >
                   <Image
-                    src="https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr"
+                    src="https://green-main-hoverfly-930.mypinata.cloud/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr"
                     alt="example"
                     width={100}
                     height={100}
@@ -107,14 +107,14 @@ export default function GuidePopover() {
                   justifyContent={"center"}
                 >
                   <Image
-                    src="https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr"
+                    src="https://green-main-hoverfly-930.mypinata.cloud/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr"
                     alt="example"
                     width={100}
                     height={100}
                   />
                   <FaArrowRight />
                   <Image
-                    src="https://ipfs.io/ipfs/QmbP1Dn6jk2WHxYRztuyeonZk4FG3BLM1hQqPUsnbtuyBf"
+                    src="https://green-main-hoverfly-930.mypinata.cloud/ipfs/QmbP1Dn6jk2WHxYRztuyeonZk4FG3BLM1hQqPUsnbtuyBf"
                     alt="example"
                     width={100}
                     height={100}

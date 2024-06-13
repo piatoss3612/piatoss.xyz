@@ -192,7 +192,7 @@ export default function SupportBox() {
           title: "Congratulations!",
           text: "You've received a new NFT and leveled up!",
           imageUrl:
-            "https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
+            "https://green-main-hoverfly-930.mypinata.cloud/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
           imageWidth: 200,
           confirmButtonText: "OK",
         });
@@ -201,7 +201,7 @@ export default function SupportBox() {
           title: "Thank you!",
           text: "You've received a new NFT!",
           imageUrl:
-            "https://ipfs.io/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
+            "https://green-main-hoverfly-930.mypinata.cloud/ipfs/QmPCo5NSM6f9aexc6FAzNLR1M41cJcdR8ZRm8H45jCavnr",
           imageWidth: 200,
           confirmButtonText: "OK",
         });
