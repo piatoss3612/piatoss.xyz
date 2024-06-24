@@ -21,12 +21,10 @@ import {
 
 export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
   const portfolioUrl =
-    "https://piatoss3612.notion.site/Lee-Hyohwak-bf38f6bb673a439f9325e92c0b09a6a6?pvs=4";
+    "https://www.notion.so/piatoss3612/d02f1c05aca944d7867bacbeef766aab?pvs=4";
 
   const openPortfolio = () => {
-    window.open(
-      "https://piatoss3612.notion.site/Lee-Hyohwak-bf38f6bb673a439f9325e92c0b09a6a6?pvs=4"
-    );
+    window.open(portfolioUrl, "_blank");
   };
 
   return (
@@ -61,7 +59,7 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
           Hyohwak Lee
         </Text>
         <Text fontWeight="bold" color="gray.500" mb={4}>
-          Blockchain Engineer
+          Full-Stack Developer
         </Text>
         <Text fontWeight="bold" fontSize="xl" mb={4}>
           My Journey

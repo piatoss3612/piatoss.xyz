@@ -1,0 +1,4 @@
+[submodule "4dollar"]
+	path = 4dollar
+	url = https://github.com/piatoss3612/4dollar
+	branch = main
