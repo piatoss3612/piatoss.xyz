@@ -19,7 +19,7 @@ import {
   useWaitForTransactionReceipt,
 } from "wagmi";
 import { parseEther } from "viem";
-import { FourDollarV1Abi } from "@/abi/FourDollarV1";
+import { FourDollarAddressPolygon, FourDollarV1Abi } from "@/abi/FourDollarV1";
 import { FaHeart } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
@@ -31,7 +31,6 @@ export default function SupportBox() {
   const chainId = useChainId();
   const [contractAddress, setContractAddress] = useState<string>("");
   const [amount, setAmount] = useState<string>("");
-  const [donationAmount, setDonationAmount] = useState<string>("");
   const [amountIsInvalid, setAmountIsInvalid] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -53,36 +52,44 @@ export default function SupportBox() {
     isLoading: isReceiptLoading,
   } = useWaitForTransactionReceipt({ hash });
 
+  const { data: donationAmountInUSD } = useReadContract({
+    abi: FourDollarV1Abi,
+    address: contractAddress as `0x${string}`,
+    functionName: "donationAmountInUSD",
+    args: [account.address || "0x0"],
+    query: {
+      enabled: !!account.address && !!contractAddress,
+    },
+  });
+
+  const accumulatedDonationAmount = parseFloat(
+    (Number(donationAmountInUSD || 0) / 10 ** 8).toString()
+  ).toFixed(4);
+
   const { data: amountInUSD } = useReadContract({
     abi: FourDollarV1Abi,
     address: contractAddress as `0x${string}`,
     functionName: "calculateBaseAssetAmountInUSD",
     args: [parseEther(amount)],
+    query: {
+      enabled: !!contractAddress && !!amount,
+    },
   });
+
+  const donationAmount = parseFloat(
+    (Number(amountInUSD || 0) / 10 ** 8).toString()
+  ).toFixed(4);
 
   useEffect(() => {
     if (!chainId) return;
 
-    if (chainId === 80001) {
-      // mumbai testnet
-      setContractAddress("0xA37A5a00e55b90B9522bB5181Fe4d64326a2bd36");
-    } else if (chainId === 137) {
+    if (chainId === 137) {
       // polygon mainnet
-      setContractAddress("0x4FA0032BD433aC07418ca4d28031D48a4c384079");
+      setContractAddress(FourDollarAddressPolygon);
     } else {
       setContractAddress("");
     }
   }, [chainId]);
-
-  useEffect(() => {
-    if (amountInUSD && !amountIsInvalid) {
-      setDonationAmount(
-        parseFloat((Number(amountInUSD) / 10 ** 8).toString()).toFixed(4)
-      );
-    } else {
-      setDonationAmount("");
-    }
-  }, [amountInUSD]);
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseEther(e.target.value);
@@ -91,7 +98,6 @@ export default function SupportBox() {
     if (value > balance) {
       setAmountIsInvalid(true);
       setAmount(e.target.value);
-      setDonationAmount("");
 
       if (inputRef.current) {
         inputRef.current.blur();
@@ -146,7 +152,6 @@ export default function SupportBox() {
         confirmButtonText: "OK",
       });
       setAmount("");
-      setDonationAmount("");
     } else if (isError) {
       Swal.fire({
         title: "Oops!",
@@ -231,7 +236,12 @@ export default function SupportBox() {
   }, [receipt, isConfirmed, receiptIsError]);
 
   return (
-    <Stack>
+    <Stack spacing={4}>
+      <Text fontSize="sm" color="gray.500">
+        {contractAddress
+          ? `You have supported $${accumulatedDonationAmount} so far.`
+          : "Please connect your wallet to support the project."}
+      </Text>
       <FormControl>
         <FormLabel>Amount to support</FormLabel>
         <Stack direction="row" alignItems="center">
@@ -254,6 +264,9 @@ export default function SupportBox() {
         )}
       </FormControl>
       <Stack mt={2} mb={2}>
+        <Text fontSize="sm" color="gray.500">
+          You will support
+        </Text>
         <Heading lineHeight="tall">
           $ {donationAmount ? donationAmount : "0"}
         </Heading>

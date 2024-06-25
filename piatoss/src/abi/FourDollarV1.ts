@@ -1,4 +1,5 @@
-export const FourDollarV1Abi = [
+const FourDollarAddressPolygon = "0x4FA0032BD433aC07418ca4d28031D48a4c384079";
+const FourDollarV1Abi = [
   {
     type: "constructor",
     inputs: [],
@@ -672,4 +673,6 @@ export const FourDollarV1Abi = [
     name: "ZeroAmount",
     inputs: [],
   },
-];
+] as const;
+
+export { FourDollarV1Abi, FourDollarAddressPolygon };
