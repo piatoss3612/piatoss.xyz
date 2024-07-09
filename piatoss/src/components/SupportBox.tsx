@@ -270,6 +270,17 @@ export default function SupportBox() {
         <Heading lineHeight="tall">
           $ {donationAmount ? donationAmount : "0"}
         </Heading>
+        <Text fontSize="sm" color="gray.500">
+          Verified contract can be found{" "}
+          <a
+            href={`https://polygonscan.com/address/${contractAddress}`}
+            target="_blank"
+            rel="noreferrer"
+            style={{ color: "blue" }}
+          >
+            here
+          </a>
+        </Text>
       </Stack>
       <Button
         isDisabled={!contractAddress || amountIsInvalid}
