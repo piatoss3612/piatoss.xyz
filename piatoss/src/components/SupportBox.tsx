@@ -3,11 +3,13 @@ import {
   Button,
   FormControl,
   FormHelperText,
-  FormLabel,
-  Heading,
   Input,
   Stack,
   Text,
+  Box,
+  Link,
+  Flex,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import {
   BaseError,
@@ -22,7 +24,6 @@ import { parseEther } from "viem";
 import { FourDollarAddressPolygon, FourDollarV1Abi } from "@/abi/FourDollarV1";
 import { FaHeart } from "react-icons/fa6";
 import Swal from "sweetalert2";
-
 export default function SupportBox() {
   const account = useAccount();
   const { data: balanceData } = useBalance({
@@ -34,6 +35,10 @@ export default function SupportBox() {
   const [amountIsInvalid, setAmountIsInvalid] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const textColor = useColorModeValue("gray.800", "gray.100");
+  const accentColor = useColorModeValue("purple.600", "purple.300");
+  const inputBg = useColorModeValue("white", "gray.700");
 
   const {
     writeContract,
@@ -237,60 +242,68 @@ export default function SupportBox() {
 
   return (
     <Stack spacing={4}>
-      <Text fontSize="sm" color="gray.500">
+      <Text fontSize="sm" color={textColor}>
         {contractAddress
           ? `You have supported $${accumulatedDonationAmount} so far.`
           : "Please connect your wallet to support the project."}
       </Text>
       <FormControl>
-        <FormLabel>Amount to support</FormLabel>
-        <Stack direction="row" alignItems="center">
-          <Input
-            type="number"
-            ref={inputRef}
-            value={amount}
-            onChange={handleAmountChange}
-            isInvalid={amountIsInvalid}
-            isDisabled={isPending || isReceiptLoading}
-          />
-          <Text fontSize="lg">
-            {balanceData?.symbol ? balanceData.symbol : "ETHER"}
+        <Flex alignItems="center" mb={2}>
+          <Text fontSize="sm" fontWeight="medium" color={textColor} mr={2}>
+            Amount to support
           </Text>
-        </Stack>
+          <Text fontSize="sm" fontWeight="bold" color={accentColor}>
+            {balanceData?.symbol || "MATIC"}
+          </Text>
+        </Flex>
+        <Input
+          type="number"
+          ref={inputRef}
+          value={amount}
+          onChange={handleAmountChange}
+          isInvalid={amountIsInvalid}
+          isDisabled={isPending || isReceiptLoading}
+          placeholder="Enter amount"
+          bg={inputBg}
+          border="1px"
+          borderColor="gray.300"
+          _hover={{ borderColor: "gray.400" }}
+          _focus={{
+            borderColor: accentColor,
+            boxShadow: `0 0 0 1px ${accentColor}`,
+          }}
+        />
         {amountIsInvalid && (
-          <FormHelperText color={"red"}>
-            Insufficient balance! 😱
-          </FormHelperText>
+          <FormHelperText color="red.500">Insufficient balance!</FormHelperText>
         )}
       </FormControl>
-      <Stack mt={2} mb={2}>
-        <Text fontSize="sm" color="gray.500">
+      <Box>
+        <Text fontSize="sm" color={textColor} mb={1}>
           You will support
         </Text>
-        <Heading lineHeight="tall">
-          $ {donationAmount ? donationAmount : "0"}
-        </Heading>
-        <Text fontSize="sm" color="gray.500">
-          Verified contract can be found{" "}
-          <a
-            href={`https://polygonscan.com/address/${contractAddress}`}
-            target="_blank"
-            rel="noreferrer"
-            style={{ color: "blue" }}
-          >
-            here
-          </a>
+        <Text fontSize="2xl" fontWeight="bold">
+          $ {donationAmount || "0.0000"}
         </Text>
-      </Stack>
+      </Box>
+      <Text fontSize="xs" color={textColor}>
+        Verified contract can be found{" "}
+        <Link
+          href={`https://polygonscan.com/address/${contractAddress}`}
+          isExternal
+          color={accentColor}
+          fontWeight="medium"
+        >
+          here
+        </Link>
+      </Text>
       <Button
         isDisabled={!contractAddress || amountIsInvalid}
         isLoading={isPending || isReceiptLoading}
         w="full"
-        bgGradient="linear(to-r, pink.400, red.400)"
+        bg="#FF6B6B"
         color="white"
         rounded="xl"
-        boxShadow="md"
-        _hover={{ bgGradient: "linear(to-r, pink.300, red.300)" }}
+        _hover={{ bg: "#FF8787", transform: "translateY(-2px)" }}
         leftIcon={<FaHeart />}
         onClick={handleSupport}
       >

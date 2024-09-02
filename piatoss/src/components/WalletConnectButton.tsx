@@ -1,8 +1,19 @@
 import React from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { Button, Stack } from "@chakra-ui/react";
+import {
+  Button,
+  Stack,
+  Text,
+  Box,
+  Flex,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 export default function WalletConnectButton() {
+  const buttonBg = useColorModeValue("blue.500", "blue.600");
+  const buttonHoverBg = useColorModeValue("blue.600", "blue.700");
+  const textColor = useColorModeValue("white", "gray.100");
+
   return (
     <ConnectButton.Custom>
       {({
@@ -32,13 +43,15 @@ export default function WalletConnectButton() {
                 return (
                   <Button
                     w="full"
-                    bgGradient="linear(to-r, blue.400, purple.500)"
-                    color="white"
+                    bg={buttonBg}
+                    color={textColor}
                     rounded="xl"
                     boxShadow="md"
                     _hover={{
-                      bgGradient: "linear(to-r, blue.300, purple.400)",
+                      bg: buttonHoverBg,
+                      transform: "translateY(-2px)",
                     }}
+                    transition="all 0.2s"
                     onClick={openConnectModal}
                   >
                     Connect Wallet
@@ -50,11 +63,12 @@ export default function WalletConnectButton() {
                 return (
                   <Button
                     w="full"
-                    bgGradient="linear(to-r, red.300, red.500)"
-                    color="white"
+                    bg="red.500"
+                    color={textColor}
                     rounded="xl"
                     boxShadow="md"
-                    _hover={{ bgGradient: "linear(to-r, red.200, red.400)" }}
+                    _hover={{ bg: "red.600", transform: "translateY(-2px)" }}
+                    transition="all 0.2s"
                     onClick={openChainModal}
                   >
                     Wrong network
@@ -64,43 +78,64 @@ export default function WalletConnectButton() {
 
               return (
                 <Stack
-                  direction="row"
+                  direction={{ base: "column", md: "row" }}
                   spacing={2}
-                  align="center"
-                  justifyContent="center"
-                  m={1}
+                  w="full"
                 >
-                  <Button onClick={openChainModal}>
-                    {chain.hasIcon && (
-                      <div
-                        style={{
-                          background: chain.iconBackground,
-                          width: "1rem",
-                          height: "1rem",
-                          borderRadius: 999,
-                          overflow: "hidden",
-                          marginRight: 4,
-                        }}
-                      >
-                        {chain.iconUrl && (
-                          <img
-                            alt={chain.name ?? "Chain icon"}
-                            src={chain.iconUrl}
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                            }}
-                          />
-                        )}
-                      </div>
-                    )}
-                    {chain.name}
+                  <Button
+                    flex={1}
+                    bg={buttonBg}
+                    color={textColor}
+                    rounded="xl"
+                    boxShadow="md"
+                    _hover={{
+                      bg: buttonHoverBg,
+                      transform: "translateY(-2px)",
+                    }}
+                    transition="all 0.2s"
+                    onClick={openChainModal}
+                  >
+                    <Flex align="center">
+                      {chain.hasIcon && (
+                        <Box
+                          bg={chain.iconBackground}
+                          w="24px"
+                          h="24px"
+                          rounded="full"
+                          mr={2}
+                          overflow="hidden"
+                        >
+                          {chain.iconUrl && (
+                            <img
+                              alt={chain.name ?? "Chain icon"}
+                              src={chain.iconUrl}
+                              style={{ width: "100%", height: "100%" }}
+                            />
+                          )}
+                        </Box>
+                      )}
+                      <Text>{chain.name}</Text>
+                    </Flex>
                   </Button>
-                  <Button onClick={openAccountModal}>
-                    {account.displayName}
-                    {account.displayBalance
-                      ? ` (${account.displayBalance})`
-                      : ""}
+                  <Button
+                    flex={1}
+                    bg={buttonBg}
+                    color={textColor}
+                    rounded="xl"
+                    boxShadow="md"
+                    _hover={{
+                      bg: buttonHoverBg,
+                      transform: "translateY(-2px)",
+                    }}
+                    transition="all 0.2s"
+                    onClick={openAccountModal}
+                  >
+                    <Text isTruncated>
+                      {account.displayName}
+                      {account.displayBalance
+                        ? ` (${account.displayBalance})`
+                        : ""}
+                    </Text>
                   </Button>
                 </Stack>
               );

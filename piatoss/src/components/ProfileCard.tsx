@@ -8,8 +8,11 @@ import {
   Button,
   IconButton,
   Link,
+  VStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import Profile from "@/../public/profile.png";
+import { motion } from "framer-motion";
 
 import {
   FaGithubAlt,
@@ -19,13 +22,21 @@ import {
   FaHeart,
 } from "react-icons/fa6";
 
+const MotionBox = motion(Box);
+
 export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
   const portfolioUrl =
-    "https://www.notion.so/piatoss3612/d02f1c05aca944d7867bacbeef766aab?pvs=4";
+    "https://piatoss3612.notion.site/Lee-Hyohwak-d02f1c05aca944d7867bacbeef766aab?pvs=74";
 
   const openPortfolio = () => {
     window.open(portfolioUrl, "_blank");
   };
+
+  const bgColor = useColorModeValue(
+    "rgba(255, 255, 255, 0.9)",
+    "rgba(26, 32, 44, 0.9)"
+  );
+  const textColor = useColorModeValue("gray.800", "white");
 
   return (
     <Flex
@@ -35,119 +46,119 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
       justifyContent="center"
       h="100%"
     >
-      <Box
-        bg="white"
+      <MotionBox
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        bg={bgColor}
+        backdropFilter="blur(10px)"
         w="full"
-        maxW="xl"
+        maxW="2xl"
         boxShadow="2xl"
-        rounded="lg"
-        p={6}
+        rounded="2xl"
+        p={8}
         textAlign="center"
       >
-        <Image
-          h={100}
-          w={100}
-          fit="cover"
-          rounded="full"
-          borderStyle="solid"
-          src={Profile.src}
-          alt="Profile Image"
-          mx="auto"
-          mb={4}
-        />
-        <Text fontWeight="bold" fontSize="x-large">
-          Hyohwak Lee
-        </Text>
-        <Text fontWeight="bold" color="gray.500" mb={4}>
-          Full-Stack Developer
-        </Text>
-        <Text fontWeight="bold" fontSize="xl" mb={4}>
-          My Journey
-        </Text>
-        <Text textAlign="center" color="gray.700" px={3}>
-          Exploring the integration of blockchain in everyday life, I dream of
-          crafting a better world through the power of blockchain.
-        </Text>
+        <VStack spacing={6}>
+          <Image
+            h={120}
+            w={120}
+            fit="cover"
+            rounded="full"
+            src={Profile.src}
+            alt="Profile Image"
+            boxShadow="lg"
+          />
+          <VStack spacing={1}>
+            <Text fontWeight="bold" fontSize="3xl" color={textColor}>
+              Lee Hyohwak
+            </Text>
+            <Text fontWeight="bold" color="blue.500">
+              Full-Stack Developer
+            </Text>
+          </VStack>
+          <Text fontWeight="bold" fontSize="xl" color={textColor}>
+            My Journey
+          </Text>
+          <Text color={textColor} fontSize="md" maxW="md">
+            Exploring the integration of blockchain in everyday life, I dream of
+            crafting a better world through the power of blockchain.
+          </Text>
 
-        <Stack
-          mt={8}
-          direction="row"
-          spacing={4}
-          align="center"
-          justifyContent="center"
-        >
-          <Link href="https://github.com/piatoss3612" isExternal>
-            <IconButton
-              aria-label="GitHub"
-              variant="outline"
-              colorScheme="black"
-              size="lg"
-              fontSize="24px"
-              icon={<FaGithubAlt />}
-              isRound={true}
-            />
-          </Link>
-          <Link href="https://piatoss3612.tistory.com/" isExternal>
-            <IconButton
-              aria-label="Blog"
-              variant="outline"
-              colorScheme="orange"
-              size="lg"
-              fontSize="24px"
-              icon={<FaBloggerB />}
-              isRound={true}
-            />
-          </Link>
-          <Link href="https://twitter.com/piatoss3612" isExternal>
-            <IconButton
-              aria-label="Twitter"
-              variant="outline"
-              colorScheme="black"
-              size="lg"
-              fontSize="24px"
-              icon={<FaSquareXTwitter />}
-              isRound={true}
-            />
-          </Link>
-          <Link href="mailto:piatoss3612@mail.com">
-            <IconButton
-              aria-label="Email"
-              variant="outline"
-              colorScheme="blue"
-              size="lg"
-              fontSize="24px"
-              icon={<FaEnvelope />}
-              isRound={true}
-            />
-          </Link>
-        </Stack>
+          <Stack direction="row" spacing={4} align="center" justify="center">
+            {[
+              {
+                href: "https://github.com/piatoss3612",
+                icon: FaGithubAlt,
+                label: "GitHub",
+                color: "gray",
+              },
+              {
+                href: "https://piatoss3612.tistory.com/",
+                icon: FaBloggerB,
+                label: "Blog",
+                color: "orange",
+              },
+              {
+                href: "https://twitter.com/piatoss3612",
+                icon: FaSquareXTwitter,
+                label: "Twitter",
+                color: "blue",
+              },
+              {
+                href: "mailto:piatoss3612@mail.com",
+                icon: FaEnvelope,
+                label: "Email",
+                color: "green",
+              },
+            ].map((item, index) => (
+              <Link href={item.href} key={index} isExternal>
+                <IconButton
+                  aria-label={item.label}
+                  icon={<item.icon />}
+                  size="lg"
+                  fontSize="24px"
+                  color={`${item.color}.500`}
+                  bg="transparent"
+                  _hover={{
+                    bg: `${item.color}.100`,
+                    transform: "translateY(-2px)",
+                  }}
+                  transition="all 0.2s"
+                />
+              </Link>
+            ))}
+          </Stack>
 
-        <Stack mt={8} direction="column" spacing={4}>
-          <Button
-            w="full"
-            bgGradient="linear(to-r, teal.400, blue.400)"
-            color="white"
-            rounded="xl"
-            boxShadow="md"
-            _hover={{ bgGradient: "linear(to-r, teal.300, blue.300)" }}
-            onClick={openPortfolio}
-          >
-            Portfolio
-          </Button>
-          <Button
-            w="full"
-            bgGradient="linear(to-r, pink.400, red.400)"
-            color="white"
-            rounded="xl"
-            boxShadow="md"
-            _hover={{ bgGradient: "linear(to-r, pink.300, red.300)" }}
-            leftIcon={<FaHeart />}
-            onClick={flipCard}
-          >
-            Support
-          </Button>
-        </Stack>
-      </Box>
+          <Stack w="full" maxW="md" spacing={4} mt={4}>
+            <Button
+              w="full"
+              bg="blue.500"
+              color="white"
+              rounded="xl"
+              boxShadow="md"
+              _hover={{ bg: "blue.600", transform: "translateY(-2px)" }}
+              transition="all 0.2s"
+              onClick={openPortfolio}
+            >
+              Portfolio
+            </Button>
+            <Button
+              w="full"
+              bg="pink.500"
+              color="white"
+              rounded="xl"
+              boxShadow="md"
+              _hover={{ bg: "pink.600", transform: "translateY(-2px)" }}
+              transition="all 0.2s"
+              leftIcon={<FaHeart />}
+              onClick={flipCard}
+            >
+              Support
+            </Button>
+          </Stack>
+        </VStack>
+      </MotionBox>
     </Flex>
   );
 }
