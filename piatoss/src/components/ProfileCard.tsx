@@ -10,10 +10,12 @@ import {
   Link,
   VStack,
   useColorModeValue,
+  Heading,
 } from "@chakra-ui/react";
 import Profile from "@/../public/profile.png";
 import { motion } from "framer-motion";
-
+import Typist from "react-typist";
+import "react-typist/dist/Typist.css";
 import {
   FaGithubAlt,
   FaSquareXTwitter,
@@ -53,7 +55,8 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
         bg={bgColor}
         backdropFilter="blur(10px)"
         w="full"
-        maxW="2xl"
+        minW={["300px", "350px", "400px"]} // 최소 너비 설정
+        maxW="xl"
         boxShadow="2xl"
         rounded="2xl"
         p={8}
@@ -69,21 +72,25 @@ export default function ProfileCard({ flipCard }: { flipCard: () => void }) {
             alt="Profile Image"
             boxShadow="lg"
           />
-          <VStack spacing={1}>
-            <Text fontWeight="bold" fontSize="3xl" color={textColor}>
+          <VStack spacing={2}>
+            <Heading size="lg" color={textColor} fontFamily={""}>
               Lee Hyohwak
-            </Text>
-            <Text fontWeight="bold" color="blue.500">
+            </Heading>
+            <Text fontWeight="bold" color="gray.600">
               Full-Stack Developer
             </Text>
           </VStack>
-          <Text fontWeight="bold" fontSize="xl" color={textColor}>
-            My Journey
-          </Text>
-          <Text color={textColor} fontSize="md" maxW="md">
-            Exploring the integration of blockchain in everyday life, I dream of
-            crafting a better world through the power of blockchain.
-          </Text>
+          <VStack spacing={4}>
+            <Heading size="md" color={textColor} fontFamily={""}>
+              My Journey
+            </Heading>
+            <Typist cursor={{ show: false }} avgTypingDelay={40}>
+              <Text color={textColor} fontSize="sm">
+                Exploring the integration of blockchain in everyday life,
+                crafting a better world with the power of blockchain
+              </Text>
+            </Typist>
+          </VStack>
 
           <Stack direction="row" spacing={4} align="center" justify="center">
             {[

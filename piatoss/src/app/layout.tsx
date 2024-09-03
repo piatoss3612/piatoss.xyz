@@ -1,13 +1,13 @@
 import { ChakraProvider } from "@/providers/ChakraProvider";
 import { Center, Box } from "@chakra-ui/react";
 import type { Metadata } from "next";
-import { Baloo_2 } from "next/font/google";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import { WalletProvider } from "@/providers/WalletProvider";
 import FloatingPiatoss from "@/components/FloatingPiatoss";
 
-const baloo2 = Baloo_2({ weight: "400", subsets: ["latin"] });
+import { Silkscreen } from "next/font/google";
+const silkscreen = Silkscreen({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "piatoss",
@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={baloo2.className}>
+      <body className={silkscreen.className}>
         <ChakraProvider>
           <WalletProvider>
             <Box
